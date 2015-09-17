@@ -4,13 +4,17 @@
 pushd /usr/local/src > /dev/null
 
 
+# Compute core count
+CORE_COUNT=$(cat /proc/cpuinfo | grep processor | wc -l)
+
+
 # Install upgraded automake
 wget -O automake-1.15.tar.gz \
     http://ftp.gnu.org/gnu/automake/automake-1.15.tar.gz
 tar xzf automake-1.15.tar.gz
 pushd automake-1.15 > /dev/null
 ./configure
-make
+make -j$CORE_COUNT
 make install
 popd > /dev/null
 

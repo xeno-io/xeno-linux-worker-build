@@ -4,13 +4,17 @@
 pushd /usr/local/src > /dev/null
 
 
+# Compute core count
+CORE_COUNT=$(cat /proc/cpuinfo | grep processor | wc -l)
+
+
 # Install Python
 wget -O Python-2.7.10.tar.gz \
     https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
 tar xzf Python-2.7.10.tar.gz
 pushd Python-2.7.10 > /dev/null
 ./configure
-make
+make -j$CORE_COUNT
 make install
 popd > /dev/null
 

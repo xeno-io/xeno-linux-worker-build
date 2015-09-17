@@ -4,6 +4,10 @@
 pushd /usr/local/src > /dev/null
 
 
+# Compute core count
+CORE_COUNT=$(cat /proc/cpuinfo | grep processor | wc -l)
+
+
 # Install CMake
 wget -O cmake-3.3.1.tar.gz \
     http://www.cmake.org/files/v3.3/cmake-3.3.1.tar.gz
@@ -11,7 +15,7 @@ tar xzf cmake-3.3.1.tar.gz
 pushd cmake-3.3.1 > /dev/null
 # Need to use system cURL if we want SSL to work
 ./configure --system-curl
-make
+make -j$CORE_COUNT
 make install
 popd > /dev/null
 

@@ -4,6 +4,10 @@
 pushd /usr/local/src > /dev/null
 
 
+# Compute core count
+CORE_COUNT=$(cat /proc/cpuinfo | grep processor | wc -l)
+
+
 # Install GCC
 # NOTE: GCC requires an out-of-tree build
 wget -O gcc-5.2.0.tar.gz \
@@ -15,7 +19,7 @@ popd > /dev/null
 mkdir gcc-5.2.0-build
 pushd gcc-5.2.0-build > /dev/null
 ../gcc-5.2.0/configure --enable-languages=c,c++
-make
+make -j$CORE_COUNT
 make install
 popd > /dev/null
 

@@ -4,13 +4,17 @@
 pushd /usr/local/src > /dev/null
 
 
+# Compute core count
+CORE_COUNT=$(cat /proc/cpuinfo | grep processor | wc -l)
+
+
 # Install upgraded binutils
 wget -O binutils-2.25.1.tar.gz \
     http://ftp.gnu.org/gnu/binutils/binutils-2.25.1.tar.gz
 tar xzf binutils-2.25.1.tar.gz
 pushd binutils-2.25.1 > /dev/null
 ./configure
-make
+make -j$CORE_COUNT
 make install
 popd > /dev/null
 
