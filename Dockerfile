@@ -1,4 +1,5 @@
-# Start with a CentOS 5 base (this will default to the latest CentOS 5 release)
+# Start with a CentOS 5 base (this will default to the latest x86_64 CentOS 5
+# release)
 FROM centos:5
 
 # Set the maintainer
