@@ -10,6 +10,12 @@ CORE_COUNT=$(cat /proc/cpuinfo | grep processor | wc -l)
 
 # Install GCC
 # NOTE: GCC requires an out-of-tree build
+# NOTE: There was an issue where libsanitizer wouldn't build against 2.6.18
+# kernels:
+#   https://gcc.gnu.org/bugzilla/show_bug.cgi?id=59068
+# This seems to be fixed in (at least) GCC 5.2+, though mention of the exact
+# version that fixed it is fuzzy.  It worked in GCC 4.8 as well.  See also:
+#   http://marc.info/?l=gcc-patches&m=138599938123614&w=2
 wget -O gcc-5.2.0.tar.gz \
     http://ftp.gnu.org/gnu/gcc/gcc-5.2.0/gcc-5.2.0.tar.gz
 tar xzf gcc-5.2.0.tar.gz
